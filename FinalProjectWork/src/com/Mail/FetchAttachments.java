@@ -19,16 +19,14 @@ import javax.mail.internet.MimeBodyPart;
 
 public class FetchAttachments {
 
-	private static String saveDirectory = "/home/content"; // directory to save
-															// the downloaded
-															// documents
-
+	private static String saveDirectory = "/home/content"; 
+	
 	public void setSaveDirectory(String dir) {
 		FetchAttachments.saveDirectory = dir;
-		System.out.println("directory saved");
+		//System.out.println("directory saved");
 	}
 
-	public void downloadEmailAttachments() {
+	public void downloadEmailAttachments() throws InterruptedException {
 		// System.out.println("download process started");
 		Properties properties = new Properties();
 
@@ -53,17 +51,16 @@ public class FetchAttachments {
 		try {
 			// connects to the message store
 			Store store = session.getStore("pop3s");
-			// System.out.println("get store line");
 			store.connect("pop.gmail.com", userName, password);
-			// System.out.println("connect line");
-
 			// opens the inbox folder
+			
+			System.out.println("Reading inbox");
 			Folder folderInbox = store.getFolder("INBOX");
 			folderInbox.open(Folder.READ_ONLY);
 
 			// fetches new messages from server
 			Message[] arrayMessages = folderInbox.getMessages();
-			System.out.println("Total Message" + arrayMessages.length);
+			System.out.println("Total Message --> " + arrayMessages.length);
 
 			for (int i = 0; i < arrayMessages.length; i++) {
 				Message message = arrayMessages[i];
@@ -94,7 +91,6 @@ public class FetchAttachments {
 						} else {
 							// this part may be the message content
 							messageContent = part.getContent().toString();
-							System.out.println(messageContent);
 						}
 					}
 
@@ -108,7 +104,8 @@ public class FetchAttachments {
 					}
 				}
 			}
-
+			System.out.println("Please wait for some time...");
+			Thread.sleep(3000);
 			// disconnect
 			folderInbox.close(false);
 			store.close();
@@ -142,7 +139,6 @@ public class FetchAttachments {
 				}
 			}
 		});
-
 		emailExecutor.shutdown();
 
 		

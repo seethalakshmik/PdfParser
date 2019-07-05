@@ -19,18 +19,17 @@ public class StatusUpdate {
 			// System.out.println("jdbc Connection :");
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/invoice", "root", "seetha"); //
-			// System.out.println(con);
+
 			String sql = "UPDATE invoice_details SET status = ? WHERE invoice_no = ?";
 			String sql1 = "select email from invoice_details where invoice_no = " + invoiceToChange;
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
 			preparedStatement.setString(1, StatusToUpdate);
 			preparedStatement.setString(2, invoiceToChange);
 			preparedStatement.executeUpdate();
-			// System.out.println("update success");
+			System.out.println("update success");
 
 			PreparedStatement preparedStatement2 = con.prepareStatement(sql1);
 			ResultSet rs = preparedStatement2.executeQuery(sql1);
-			// System.out.println("select success");
 
 			while (rs.next()) {
 				String email = rs.getString("email");

@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 public class readLineFromText {
 
-	// public static void main(String[] args) {
 	public static void storeInDB(String Email, String FileName) {
 		String invoice_no = null;
 		String invoice_date = null;

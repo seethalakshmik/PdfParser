@@ -22,12 +22,23 @@ public class DisplayInvoice {
 			String sql = "select * from invoice_details";
 			PreparedStatement preparedStatement2 = con.prepareStatement(sql);
 			ResultSet rs = preparedStatement2.executeQuery(sql);
+			System.out.print("Invoice no" + "   ");
+			System.out.print("Invoice Date" +  "   ");
+			System.out.print("Customer Po" + "   ");
+			System.out.print("       Address" + "   ");
+			System.out.print("                 Total Amount");
+			System.out.println();
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+			System.out.println();
 			while (rs.next()) {
-				System.out.println("Invoice no : " + rs.getString(1));
-				System.out.println("Invoice Date : " + rs.getString(2));
-				System.out.println("Customer Po : " + rs.getString(3));
-				System.out.println("Address : " + rs.getString(4));
-				System.out.println("Total Amount : " + rs.getString(5));
+				System.out.print(rs.getString(1) + "     ");
+				System.out.print(rs.getString(2) + "      ");
+				System.out.print(rs.getString(3) + "     ");
+				System.out.print(rs.getString(4) + "        ");
+				System.out.print(rs.getString(5));
+				System.out.println();
+				System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+				//System.out.println("----------------------------------------------------------------------------------------------------------------------------");
 				System.out.println();
 			}
 
